@@ -220,7 +220,7 @@ o added command line options for
          dash patterns. As can be seen from the table, an empty dash array and zero phase can be used to restore the
          dash pattern to a solid line.
 
-                                               Table 56 ­ Examples of Line Dash Patterns
+                                               Table 56 ï¿½ Examples of Line Dash Patterns
 
                               Dash Array       Appearance                   Description
                               and Phase
@@ -370,7 +370,9 @@ o added command line options for
    printf("<< /Length %d 0 R >>\n", GLOBAL_STREAM_LEN_ID);
    printf("stream\n");
    GLOBAL_STREAM_START = ftell(stdout);
-   print_bars();
+   if(GLOBAL_SHADE_STEP > 0){
+      print_bars();
+   }
    print_margin_label();
    printf("BT\n/F0 %g Tf\n", GLOBAL_FONT_SIZE);
    GLOBAL_YPOS = GLOBAL_PAGE_DEPTH - GLOBAL_PAGE_MARGIN_TOP;
@@ -817,10 +819,7 @@ int main(int argc, char **argv) {
              abort ();
            }
 
-           if(GLOBAL_SHADE_STEP < 1 ){
-              fprintf(stderr,"W-A-R-N-I-N-G: asa2pdf(1) resetting -i %d to -i 1\n",GLOBAL_SHADE_STEP);
-              GLOBAL_SHADE_STEP=1;
-   }
+           
 
    for (index = optind; index < argc; index++){
       fprintf (stderr,"Non-option argument %s\n", argv[index]);
